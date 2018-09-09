@@ -1,10 +1,14 @@
 package pl.sdacademy.serialization;
 
-public class SerializationSampleObject {
+import java.io.Serializable;
+
+public class SerializationSampleObject implements Serializable {
+    public static final long serialVersionUID = -2001468476590015997L;
     private String stringValue;
     private transient String transientStringValue;
     private int intValue;
     private transient int transientIntValue;
+    private double a;
 
     public SerializationSampleObject() {
         System.out.println("Constructor created");

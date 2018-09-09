@@ -1,6 +1,6 @@
 package pl.sdacademy.serialization;
 
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,6 +11,26 @@ public class Main {
         myObject.setTransientIntValue(987);
         System.out.println(myObject);
 
-//        new ObjectOutputStream()
+//        try (OutputStream fos =
+//                     new FileOutputStream("FirstSerializedObject.ser")) {
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fos);
+//            objectOutputStream.writeObject(myObject);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        try (FileInputStream fis =
+                    new FileInputStream("FirstSerializedObject.ser")) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(fis);
+            SerializationSampleObject deserialized =
+                    (SerializationSampleObject) objectInputStream.readObject();
+            System.out.println(deserialized);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
